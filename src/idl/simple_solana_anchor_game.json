@@ -38,7 +38,7 @@
         },
         {
           "name": "admin",
-          "isMut": false,
+          "isMut": true,
           "isSigner": false,
           "docs": [
             "it MUST be checked by is_admin fn."
@@ -46,6 +46,35 @@
         }
       ],
       "args": []
+    },
+    {
+      "name": "reduceHealth",
+      "accounts": [
+        {
+          "name": "healthAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "player",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "nothing is read or written to it. Amen."
+          ]
+        },
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
     }
   ],
   "accounts": [
