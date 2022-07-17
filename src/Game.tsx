@@ -18,6 +18,7 @@ export const Game = () => {
   const { sendTransaction } = useWallet();
   const [ playerPda, setPlayerPda ] = useState<PublicKey | null>(null);
   const [ health, setHealth ] = useState<HealthState|null>(null);
+  const [ amount, setAmount ] = useState<string|null>('9');
   const [ loading, setLoading ] = useState<boolean>(false);
 
   const updateHealth = async () => {
@@ -131,11 +132,17 @@ export const Game = () => {
       // await program.
       const transaction = new Transaction();
 
+      const buyAmount = Number(amount);
+
+      if (!buyAmount) {
+        alert(`Not valid amount`);
+      }
+
       transaction.add(
         SystemProgram.transfer({
           fromPubkey: wallet.publicKey,
           toPubkey: playerPda,
-          lamports: 9 * LAMPORTS_PER_SOL / 10,
+          lamports: buyAmount * LAMPORTS_PER_SOL / 10,
         })
       );
 
@@ -182,6 +189,7 @@ export const Game = () => {
         </div>
       )}
 
+      <input value={`${amount}`} onChange={(e) => setAmount(e.target.value)} />
       <button onClick={buyHealth} disabled={!wallet}>Buy</button>
       {/*<button onClick={reduceHealth} disabled={!wallet && !isAdmin()}>Reduce Health on 2*</button>*/}
       {/*<div>* Admin decides to reduce health amount (should never be done from the frontend, it is here only for demo purposes. Allowed only for admin</div>*/}
