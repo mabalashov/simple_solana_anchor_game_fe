@@ -186,11 +186,13 @@ export const Game = () => {
           <h2>Health</h2>
           <div><strong>Bump:&nbsp;</strong>{health.bump}</div>
           <div><strong>Health:&nbsp;</strong>{health.health.toString()}</div>
+
+          <input value={`${amount}`} onChange={(e) => setAmount(e.target.value)} />
+          <button onClick={buyHealth} disabled={!wallet}>Buy</button>
+
         </div>
       )}
 
-      <input value={`${amount}`} onChange={(e) => setAmount(e.target.value)} />
-      <button onClick={buyHealth} disabled={!wallet}>Buy</button>
       {/*<button onClick={reduceHealth} disabled={!wallet && !isAdmin()}>Reduce Health on 2*</button>*/}
       {/*<div>* Admin decides to reduce health amount (should never be done from the frontend, it is here only for demo purposes. Allowed only for admin</div>*/}
     </React.Fragment>
