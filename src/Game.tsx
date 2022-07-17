@@ -183,8 +183,8 @@ export const Game = () => {
       )}
 
       <button onClick={buyHealth} disabled={!wallet}>Buy</button>
-      <button onClick={reduceHealth} disabled={!wallet && !isAdmin()}>Reduce Health on 2*</button>
-      <div>* Admin decides to reduce health amount (should never be done from the frontend, it is here only for demo purposes. Allowed only for admin</div>
+      {/*<button onClick={reduceHealth} disabled={!wallet && !isAdmin()}>Reduce Health on 2*</button>*/}
+      {/*<div>* Admin decides to reduce health amount (should never be done from the frontend, it is here only for demo purposes. Allowed only for admin</div>*/}
     </React.Fragment>
   )
 }
