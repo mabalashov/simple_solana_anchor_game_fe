@@ -1,0 +1,90 @@
+{
+  "version": "0.1.0",
+  "name": "simple_solana_anchor_game",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "healthAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "player",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "buyHealth",
+      "accounts": [
+        {
+          "name": "healthAccount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "player",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "admin",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "it MUST be checked by is_admin fn."
+          ]
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "UserHealth",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "health",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ResultOfRand",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "value",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NotAdmin"
+    }
+  ],
+  "metadata": {
+    "address": "26tRpFpHJQtqBPDYcgWxNRoWxUbdYLbVW1bLmF5Lb4dR"
+  }
+}
