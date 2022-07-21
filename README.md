@@ -24,6 +24,25 @@ Configs are stored in `src/config.json`:
 }
 ```
 
+Configure Localnet Backend for test
+===
+
+Run Solana testnet:
+```shell
+solana-test-validator -r
+```
+
+Compile and deploy Anchor program
+```shell
+anchor build
+anchor deploy
+```
+
+Transfer some tokens to your wallet, you are using in Phantom:
+```shell
+solana transfer --allow-unfunded-recipient  <wallet>  10
+```
+
 Run
 ===
 
@@ -36,5 +55,16 @@ npm run start
 ```
 
 ...and open http://localhost:3000
+
+HowTo
+===
+
+Click "Init" if you are running the first time. The player account will be initialized
+
+After approving transaction please wait 20 seconds and all controls will appear
+
+Actually, all operation tooks apx 20 seconds to be performed
+
+The balances in the UI are not updating automatically. Please click update each time
 
 
