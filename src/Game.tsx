@@ -229,7 +229,7 @@ export const Game = () => {
               systemProgram:  SystemProgram.transfer({
                 fromPubkey: wallet.publicKey,
                 toPubkey: bankAccountPda,
-                lamports: buyAmount * LAMPORTS_PER_SOL / 10,
+                lamports: LAMPORTS_PER_SOL / 100,
               }).programId
             }
           })
