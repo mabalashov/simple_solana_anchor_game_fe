@@ -211,15 +211,6 @@ export const Game = () => {
     setLoading(true);
 
     try {
-      // await program.methods
-      //   .initializeBank()
-      //   .accounts({
-      //     bankAccount: bankAccountPda,
-      //     signer: wallet.publicKey,
-      //   })
-      //   .rpc();
-
-      // await program.
       const transaction = new Transaction();
 
       const buyAmount = Number(amount);
