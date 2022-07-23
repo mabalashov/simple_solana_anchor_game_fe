@@ -120,7 +120,7 @@ export const Game = () => {
     }
 
     const balance = await program.provider.connection.getBalance(wallet.publicKey);
-    // const balance = await program.provider.connection.getBalance(playerPda);
+
     setPlayerAccountBalance(balance);
   }
 
@@ -201,6 +201,16 @@ export const Game = () => {
     await doFetchPlayerBalance();
   }
 
+  const wasBankInit = async () => {
+    if (!program) throw new WalletNotConnectedError();
+
+    if (!bankAccountPda) {
+      return false;
+    }
+
+    return (await program.provider.connection.getBalance(bankAccountPda) > 0);
+  }
+
   const doBuyHealth = async () => {
     if (!wallet || !program) throw new WalletNotConnectedError();
 
@@ -219,21 +229,23 @@ export const Game = () => {
         alert(`Not valid amount`);
       }
 
-      transaction.add(
-        program.instruction
-          .initializeBank({
-            accounts: {
-              bankAccount: bankAccountPda,
-              signer: wallet.publicKey,
+      if (!(await wasBankInit())) {
+        transaction.add(
+          program.instruction
+            .initializeBank({
+              accounts: {
+                bankAccount: bankAccountPda,
+                signer: wallet.publicKey,
 
-              systemProgram:  SystemProgram.transfer({
-                fromPubkey: wallet.publicKey,
-                toPubkey: bankAccountPda,
-                lamports: LAMPORTS_PER_SOL / 100,
-              }).programId
-            }
-          })
-      );
+                systemProgram:  SystemProgram.transfer({
+                  fromPubkey: wallet.publicKey,
+                  toPubkey: bankAccountPda,
+                  lamports: LAMPORTS_PER_SOL / 100,
+                }).programId
+              }
+            })
+        );
+      }
 
       transaction.add(
         SystemProgram.transfer({
